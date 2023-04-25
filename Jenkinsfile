@@ -10,8 +10,8 @@ pipeline {
         stage('Pre-Checks'){
             steps{
                 parallel(
-                    Docker-Verify: { sh 'docker --version' },
-                    Git-Verify: { sh 'git --version' }
+                    'Docker-Verify': { sh 'docker --version' },
+                    'Git-Verify': { sh 'git --version' }
                         )
             }
         }
