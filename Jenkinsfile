@@ -6,7 +6,7 @@ pipeline {
         Docker_Tag = 'v2'
     }
     
-    options {timestamp()}
+    options {timestamps()}
     
     stages {
         
