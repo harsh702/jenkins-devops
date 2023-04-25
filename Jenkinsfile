@@ -18,7 +18,7 @@ pipeline {
         }
        stage('Docker-Build') {
             steps {
-                sh 'sudo docker build -t ${Docker_Image_Name}:${Docker_Tag} .'
+                sh 'sudo docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} .'
             }
         }
         stage('Docker-Image-Verify') {
