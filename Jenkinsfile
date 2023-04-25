@@ -6,7 +6,10 @@ pipeline {
         Docker_Tag = 'v2'
     }
     
-    options {timestamps()}
+    options {
+            timestamps()
+            skipDefaultCheckout()
+            }
     
     stages {
         
