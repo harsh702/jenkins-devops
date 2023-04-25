@@ -36,6 +36,7 @@ pipeline {
        stage('Docker-Build') {
             steps {
                 sh "sudo docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ."
+                sh "sudo docker inspect ${Docker_Image_Name}:${env.BUILD_NUMBER}"
             }
         }
         stage('Docker-Image-Verify') {
