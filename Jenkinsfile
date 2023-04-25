@@ -6,21 +6,27 @@ pipeline {
         Docker_Tag = 'v2'
     }
     stages {
-        stage('Docker-Verify') {
-            steps {
-                retry(4) {
-               sh 'docker --version'
-                }
-                timeout(time: 10, unit: 'SECONDS') {
-                       sleep 30
-                    }
+        
+        stage('Pre-Checks'){
+            steps{
+                parllel(
+                    Docker-Verify: { sh 'docker --version' },
+                    Git-Verify: { sh 'git --version' }
+                        )
             }
+        }
+        
+/*        stage('Docker-Verify') {
+            steps {
+                sh 'docker --version'
+                  }
         }
        stage('Git-Verify') {
             steps {
                sh 'git --version'
             }
         }
+     */
        stage('Docker-Build') {
             steps {
                 sh "sudo docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ."
