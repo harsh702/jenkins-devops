@@ -8,31 +8,28 @@ pipeline {
     
     options {
             timestamps()
-           buildDiscarder(logRotator(numToKeepStr: '1'))
+            buildDiscarder(logRotator(numToKeepStr: '10'))
+            disableConcurrentBuilds()
                }
     
     stages {
         
         stage('Pre-Checks'){
-            steps{
-                parallel(
-                    'Docker-Verify': { sh 'docker --version' },
-                    'Git-Verify': { sh 'git --version' }
-                        )
-            }
-        }
-        
-/*        stage('Docker-Verify') {
-            steps {
-                sh 'docker --version'
+            parallel {
+              stage('Docker-Verify') {
+                steps {
+                  sh 'docker --version'
+                  sh 'sleep 30'
                   }
-        }
-       stage('Git-Verify') {
-            steps {
-               sh 'git --version'
-            }
-        }
-     */
+               }
+              stage('Git-Verify') {
+                steps {
+                 sh 'git --version'
+                    }
+                  }
+             }
+     }
+     
        stage('Docker-Build') {
             steps {
                 sh "sudo docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ."
