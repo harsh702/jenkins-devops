@@ -17,5 +17,10 @@ pipeline {
                sh 'sudo docker build -t myimage:v1 .'
             }
         }
+        stage('Docker-Image-Verify') {
+            steps {
+               sh 'sudo docker images'
+            }
+        }
     }
 }
