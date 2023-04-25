@@ -9,7 +9,7 @@ pipeline {
         
         stage('Pre-Checks'){
             steps{
-                parllel(
+                parallel(
                     Docker-Verify: { sh 'docker --version' },
                     Git-Verify: { sh 'git --version' }
                         )
