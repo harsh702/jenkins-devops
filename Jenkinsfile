@@ -53,10 +53,10 @@ pipeline {
         }
         
         stage('Docker-deploy') {
-            steps {
-                input {
+                 input {
                     message "Approval to deploy the docker image"
                              }
+            steps {
                 sh "sudo docker run -itd -p 80:80 ${Docker_Image_Name}:${env.BUILD_NUMBER}"
                 sh 'sudo docker ps'
             }
