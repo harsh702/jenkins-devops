@@ -19,8 +19,7 @@ pipeline {
               stage('Docker-Verify') {
                 steps {
                   sh 'docker --version'
-                  sh 'sleep 30'
-                  }
+                         }
                }
               stage('Git-Verify') {
                 steps {
@@ -31,6 +30,9 @@ pipeline {
      }
      
        stage('Docker-Build') {
+           when {
+                branch 'origin/test'
+                     }
             steps {
                 sh "sudo docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ."
                 sh "sudo docker inspect ${Docker_Image_Name}:${env.BUILD_NUMBER}"
