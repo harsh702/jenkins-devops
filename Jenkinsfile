@@ -63,11 +63,12 @@ pipeline {
             }
         }  
         
-        stage('Docker-images-cleanup') {
+ /*    removed the clean up stage and moved it to post cleanup  
+       stage('Docker-images-cleanup') {
             steps {
                 sh 'sudo docker image prune -af'
             }
-        }
+        } */
         
      }
     
@@ -87,5 +88,8 @@ pipeline {
     // One or more steps need to be included within each condition's block.
              sh 'curl localhost'
            }
+        cleanup {
+            sh 'sudo docker image prune -af'
+        }
      }
 }
