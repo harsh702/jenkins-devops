@@ -68,7 +68,11 @@ pipeline {
             }
         }
         
-        
+        post {
+          always {
+               sh 'sudo docker images'
+          }
+     }
         
         
                 
