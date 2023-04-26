@@ -48,7 +48,7 @@ pipeline {
         
         stage('Docker-cleanup') {
             steps {
-                sh 'sudo docker rm -f\$(sudo docker ps -a -q) 2 > /dev/null || true'
+                sh 'sudo docker rm -f \$(sudo docker ps -a -q) 2 > /dev/null || true'
             }
         }
         
