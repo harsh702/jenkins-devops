@@ -36,8 +36,8 @@ pipeline {
                    }
               }
             steps {
-               /* sh "sudo docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ." */
-                sh "sudo dockers build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ." 
+               sh "sudo docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ." 
+               /* sh "sudo dockes build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ." */
                 sh "sudo docker inspect ${Docker_Image_Name}:${env.BUILD_NUMBER}"
             }
         }
@@ -81,6 +81,11 @@ pipeline {
          failure {
     // One or more steps need to be included within each condition's block.
              sh 'sudo docker rm -f \$(sudo docker ps -a -q) 2 > /dev/null || true'
+           }
+        
+          success {
+    // One or more steps need to be included within each condition's block.
+             sh 'curl localhost'
            }
      }
 }
