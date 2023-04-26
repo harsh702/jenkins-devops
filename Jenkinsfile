@@ -74,5 +74,8 @@ pipeline {
           always {
                sh 'sudo docker images'
           }
+         aborted {
+            sh 'sudo docker ps'
+  }
      }
 }
