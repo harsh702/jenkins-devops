@@ -30,9 +30,11 @@ pipeline {
      }
      
        stage('Docker-Build') {
-         when {
-            branch 'origin/main'
-                         }
+           when {
+            expression {
+                 return env.GIT_BRANCH == "origin/main"
+                   }
+              }
             steps {
                 sh "sudo docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ."
                 sh "sudo docker inspect ${Docker_Image_Name}:${env.BUILD_NUMBER}"
