@@ -31,9 +31,7 @@ pipeline {
      
        stage('Docker-Build') {
          when {
-           expression {     
-                  return env.GIT_BRANCH == "origin/test"   
-                               }
+            branch 'origin/test'
                          }
             steps {
                 sh "sudo docker build -t ${Docker_Image_Name}:${env.BUILD_NUMBER} ."
